@@ -79,6 +79,54 @@ function binarySearch(arr, val, leftIdx = 0, rightIdx = (arr.length - 1)) {
   }
 }
 
+/** Given a multi-dimensional integer array, return the total number of integers, stored inside this array */
+
+function realSize(arr) {
+  let total = 0;
+  for (let element of arr) {
+    if (Array.isArray(element)) {
+      total += realSize(element);
+    } else {
+      total += 1;
+    }
+  }
+  return total;
+}
+
+/** Write a function that sums squares of numbers in list that may contain more lists
+ */
+
+function sumSquares(arr) {
+  let sum = 0;
+  for (let element of arr) {
+    if (Array.isArray(element)) {
+      sum += sumSquares(element);
+    } else {
+      sum += Math.pow(element, 2);
+    }
+  }
+  return sum;
+}
+
+/** You need to design a recursive function called replicate which will receive arguments times and number. */
+
+// solution : build from the ground up
+// if times = 0, return an empty array
+// previous function call then appends the number
+// previous function call appends again, etc.
+// first function call then returns the array, with all values
+
+function replicate(times, number) {
+  if (times > 0) { // base case - continue until 0 times, or if less than 0 return empty array
+    let output = replicate(times - 1, number);
+    output.push(number);
+    return output;
+  } else {
+    return [];
+  }
+}
+
+
 module.exports = {
   product,
   longest,
@@ -87,5 +135,8 @@ module.exports = {
   findIndex,
   revString,
   gatherStrings,
-  binarySearch
+  binarySearch,
+  realSize,
+  sumSquares,
+  replicate
 };

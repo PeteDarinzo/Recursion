@@ -6,7 +6,10 @@ const {
   findIndex,
   revString,
   gatherStrings,
-  binarySearch
+  binarySearch,
+  realSize,
+  sumSquares,
+  replicate
 } = require("./recursion");
 
 describe("product", function () {
@@ -111,14 +114,52 @@ describe("gatherStrings", function () {
 });
 
 describe("binarySearch", function () {
-  it("should find the index of a value in a sorted array", function() {
+  it("should find the index of a value in a sorted array", function () {
     expect(binarySearch([1, 2, 3, 4], 4)).toEqual(3);
     expect(binarySearch([1, 2], 1)).toEqual(0);
     expect(binarySearch([1, 2, 3, 4, 5, 6, 7], 6)).toEqual(5);
   });
 
-  // it("should return -1 if the value is not found", function() {
-  //   expect(binarySearch([1, 2, 3, 4], 0)).toEqual(-1);
-  //   expect(binarySearch([1, 2], 11)).toEqual(-1);
-  // });
+  it("should return -1 if the value is not found", function () {
+    expect(binarySearch([1, 2, 3, 4], 0)).toEqual(-1);
+    expect(binarySearch([1, 2], 11)).toEqual(-1);
+  });
+});
+
+describe("realSize", function () {
+  it("should return the number of integers in a multi dimensional array", function () {
+    expect(realSize([1, 2, 3, 4, 5])).toEqual(5);
+    expect(realSize([[[5], 3], 0, 2, [], [4, [5, 6]]])).toEqual(7);
+    expect(realSize([[[[[[[[[1]]]]]]]]])).toEqual(1);
+    expect(realSize([10, [[10], 10], [10]])).toEqual(4);
+  });
+
+  it("should return 0 for an empty array", function () {
+    expect(realSize([])).toEqual(0);
+  });
+});
+
+
+describe("sumSquares", function () {
+  it("should return the sum of squares of numbers in list that may contain more lists", function () {
+    expect(sumSquares([1, 2, 3])).toEqual(14);
+    expect(sumSquares([[1, 2], 3])).toEqual(14);
+    expect(sumSquares([[[[[[[[[1]]]]]]]]])).toEqual(1);
+    expect(sumSquares([10, [[10], 10], [10]])).toEqual(400);
+  });
+
+  it("should return 0 for an empty array", function () {
+    expect(sumSquares([])).toEqual(0);
+  });
+});
+
+
+describe("replicate", function () {
+  it("should return a list of values", function () {
+    expect(replicate(3, 5)).toEqual([5, 5, 5,]);
+  });
+
+  it("should return an empty array", function () {
+    expect(replicate(0, 5)).toEqual([]);
+  });
 });
